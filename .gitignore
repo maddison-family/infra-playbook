@@ -1,4 +1,5 @@
 # Ansible stuff
+vault_password
 *.retry
 
 # Test artifacts
