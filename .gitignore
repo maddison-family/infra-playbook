@@ -1,0 +1,10 @@
+# Ansible stuff
+*.retry
+
+# Test artifacts
+.tox/*
+.cache/*
+.coverage
+
+# Python artifacts
+*.pyc
