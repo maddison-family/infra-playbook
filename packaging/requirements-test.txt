@@ -1,0 +1,5 @@
+# Testing utilities
+pytest>=3.2.3,<4.0
+pytest-cov>=2.5.1,<3.0
+pylama>=7.4.3,<8.0
+flake8-import-order>=0.14.1,<0.15

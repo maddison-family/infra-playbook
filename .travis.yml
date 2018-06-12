@@ -1,0 +1,17 @@
+---
+  language: python
+  python:
+    - '2.7'
+  matrix:
+    fast_finish: true
+  install:
+    - pip install -U pip
+    - pip install -U setuptools
+    - pip install -r packaging/requirements.txt
+    - pip install -r packaging/requirements-test.txt
+  script:
+    - py.test -vs --pylama
+    - ansible-playbook site.yml --syntax-check
+  notifications:
+    email: false
+...
