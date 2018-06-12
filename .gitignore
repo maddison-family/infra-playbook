@@ -1,6 +1,9 @@
 # Ansible stuff
-vault_password
 *.retry
+
+# Secrets
+vault_password
+.id_rsa
 
 # Test artifacts
 .tox/*

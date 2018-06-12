@@ -1,0 +1,18 @@
+---
+  - hosts: localhost
+    connection: local
+    tasks:
+      - name: create ssh private key file
+        copy:
+          content: "{{ ssh_keys.private }}"
+          dest: ".id_rsa"
+          mode: 0600
+        no_log: true
+      - name: add ssh key to digital ocean account
+        digital_ocean:
+          command: ssh
+          name: maddison_family_key
+          state: present
+          api_token: "{{ digital_ocean_api_token }}"
+          ssh_pub_key: "{{ ssh_keys.public }}"
+...
