@@ -21,6 +21,7 @@
       - name: set ssh key id
         set_fact:
           digital_ocean_ssh_key_id: "{{ hostvars['localhost'].digital_ocean_ssh_key.ssh_key.id }}"
+        when: not ansible_check_mode
       - name: create virtual machine
         delegate_to: localhost
         digital_ocean:
@@ -30,7 +31,7 @@
           api_token: "{{ api_tokens.digital_ocean }}"
           unique_name: true
           ipv6: true
-          ssh_key_ids: "{{ digital_ocean_ssh_key_id }}"
+          ssh_key_ids: "{{ digital_ocean_ssh_key_id | default(none) }}"
           region_id: "{{ digital_ocean_region }}"
           image_id: "{{ digital_ocean_image }}"
           size_id: "{{ digital_ocean_size }}"
