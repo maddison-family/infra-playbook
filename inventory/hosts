@@ -1,2 +1,9 @@
-[nameservers]
+[nameservers-primary]
 achilles.maddison.family
+
+[nameservers-secondary]
+briseis.maddison.family
+
+[nameservers:children]
+nameservers-primary
+nameservers-secondary
