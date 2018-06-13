@@ -13,6 +13,28 @@
           command: ssh
           name: maddison_family_key
           state: present
-          api_token: "{{ digital_ocean_api_token }}"
+          api_token: "{{ api_tokens.digital_ocean }}"
           ssh_pub_key: "{{ ssh_keys.public }}"
+        register: digital_ocean_ssh_key
+  - hosts: all
+    tasks:
+      - name: set ssh key id
+        set_fact:
+          digital_ocean_ssh_key_id: "{{ hostvars['localhost'].digital_ocean_ssh_key.ssh_key.id }}"
+      - name: create virtual machine
+        delegate_to: localhost
+        digital_ocean:
+          command: droplet
+          name: "{{ inventory_hostname }}"
+          state: present
+          api_token: "{{ api_tokens.digital_ocean }}"
+          unique_name: true
+          ipv6: true
+          ssh_key_ids: "{{ digital_ocean_ssh_key_id }}"
+          region_id: "{{ digital_ocean_region }}"
+          image_id: "{{ digital_ocean_image }}"
+          size_id: "{{ digital_ocean_size }}"
+        register: digital_ocean_droplet
+      - debug:
+          var: digital_ocean_droplet
 ...
